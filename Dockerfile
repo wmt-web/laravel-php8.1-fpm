@@ -19,7 +19,9 @@ RUN apt install git zip unzip curl gnupg2 ca-certificates lsb-release libicu-dev
 RUN apt install php-fpm php-json php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-intl -y
 
 # Install composer
-COPY --from=composer:1.10.15 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.5.4 /usr/bin/composer /usr/local/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV PATH="./vendor/bin:$PATH"
 RUN composer --help
 
 RUN rm /etc/nginx/sites-enabled/default
