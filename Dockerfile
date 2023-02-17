@@ -1,8 +1,8 @@
 # Using base ubuntu image
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 LABEL Maintainer="Harsh Solanki <harshsolanki7116@gmail.com>" \
-      Description="Nginx + PHP8.1-FPM Based on Ubuntu 22.04."
+      Description="Nginx + PHP8.1-FPM Based on Ubuntu 20.04."
 
 # Setup document root
 RUN mkdir -p /var/www/
@@ -12,11 +12,34 @@ RUN mkdir -p /var/www/
 RUN apt update --fix-missing
 RUN  DEBIAN_FRONTEND=noninteractive
 RUN ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo Asia/Kolkata > /etc/timezone
-RUN apt install git zip unzip curl ca-certificates lsb-release libicu-dev supervisor nginx nano -y
+RUN apt install -y \
+      software-properties-common \
+      git \
+      zip \
+      unzip \
+      curl \
+      ca-certificates \
+      lsb-release \
+      libicu-dev \
+      supervisor \
+      nginx \
+      nano
 
 # Install php8.1-fpm
 # Since the repo is supported on ubuntu 20
-RUN apt install php-fpm php-json php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-intl -y
+RUN add-apt-repository ppa:ondrej/php
+RUN apt update -y
+RUN apt install -y \
+      php8.1-fpm \
+      php8.1-pdo \
+      php8.1-mysql \
+      php8.1-zip \
+      php8.1-gd \
+      php8.1-mbstring \
+      php8.1-curl \
+      php8.1-xml \
+      php8.1-bcmath \
+      php8.1-intl
 
 # Install composer
 COPY --from=composer:2.5.4 /usr/bin/composer /usr/local/bin/composer
