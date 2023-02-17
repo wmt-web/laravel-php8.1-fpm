@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 LABEL Maintainer="Harsh Solanki <harshsolanki7116@gmail.com>" \
-      Description="Nginx + PHP7.4-FPM Based on Ubuntu 22.04."
+      Description="Nginx + PHP8.1-FPM Based on Ubuntu 22.04."
 
 # Setup document root
 RUN mkdir -p /var/www/
@@ -12,9 +12,9 @@ RUN mkdir -p /var/www/
 RUN apt update --fix-missing
 RUN  DEBIAN_FRONTEND=noninteractive
 RUN ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo Asia/Kolkata > /etc/timezone
-RUN apt install git zip unzip curl gnupg2 ca-certificates lsb-release libicu-dev supervisor nginx nano -y
+RUN apt install git zip unzip curl ca-certificates lsb-release libicu-dev supervisor nginx nano -y
 
-# Install php7.4-fpm
+# Install php8.1-fpm
 # Since the repo is supported on ubuntu 20
 RUN apt install php-fpm php-json php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-intl -y
 
