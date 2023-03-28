@@ -47,12 +47,16 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="./vendor/bin:$PATH"
 RUN composer --help
 
+RUN echo "* * * * * /usr/local/bin/php /var/www/artisan schedule:run >> /dev/null 2>&1"  >> /etc/cron.d/laravel-scheduler
+RUN chmod 0644 /etc/cron.d/laravel-scheduler
+
 RUN rm /etc/nginx/sites-enabled/default
 
 COPY php.ini /etc/php/8.1/fpm/php.ini
 COPY www.conf /etc/php/8.1/fpm/pool.d/www.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY supervisord.conf /etc/supervisor/conf.d/
+
 
 # # Prevent exit
 ENTRYPOINT ["/usr/bin/supervisord"]
