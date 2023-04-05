@@ -23,7 +23,8 @@ RUN apt install -y \
       libicu-dev \
       supervisor \
       nginx \
-      nano
+      nano \
+      cron
 
 # Install php8.1-fpm
 # Since the repo is supported on ubuntu 20
@@ -56,6 +57,7 @@ COPY php.ini /etc/php/8.1/fpm/php.ini
 COPY www.conf /etc/php/8.1/fpm/pool.d/www.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY supervisord.conf /etc/supervisor/conf.d/
+COPY horizon.conf /etc/supervisor/conf.d/
 
 
 # # Prevent exit
