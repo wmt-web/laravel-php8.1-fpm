@@ -60,6 +60,4 @@ COPY default.conf /etc/nginx/conf.d/
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY horizon.conf /etc/supervisor/conf.d/
 
-
-# # Prevent exit
 ENTRYPOINT ["/usr/bin/supervisord"]
