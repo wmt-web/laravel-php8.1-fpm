@@ -7,7 +7,6 @@ LABEL Maintainer="Harsh Solanki <harshsolanki7116@gmail.com>" \
 # Setup document root
 RUN mkdir -p /var/www/
 
-
 # Base install
 RUN apt update --fix-missing
 RUN  DEBIAN_FRONTEND=noninteractive
